@@ -112,14 +112,47 @@ In PHP for example, you can bypass all the script by setting this var `tarteauci
 
 <script type="text/javascript">
 tarteaucitron.init({
-    "hashtag": "#tarteaucitron", /* Ouverture automatique du panel avec le hashtag */
-    "highPrivacy": false, /* désactiver le consentement implicite (en naviguant) ? */
-    "orientation": "top", /* le bandeau doit être en haut (top) ou en bas (bottom) ? */
-    "adblocker": false, /* Afficher un message si un adblocker est détecté */
-    "showAlertSmall": true, /* afficher le petit bandeau en bas à droite ? */
-    "cookieslist": true, /* Afficher la liste des cookies installés ? */
-    "removeCredit": false, /* supprimer le lien vers la source ? */
-    "cookieDomain": ".my-multisite-domaine.fr" /* Nom de domaine sur lequel sera posé le cookie - pour les multisites / sous-domaines - Facultatif */
+    "privacyUrl": "", /* Privacy policy url */
+
+    "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+    "cookieName": "tarteaucitron", /* Cookie name */
+
+    "orientation": "middle", /* Banner position (top - bottom) */
+    "showAlertSmall": true, /* Show the small banner on bottom right */
+    "cookieslist": true, /* Show the cookie list */
+
+    "adblocker": false, /* Show a Warning if an adblocker is detected */
+    "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
+    "highPrivacy": true, /* Disable auto consent */
+    "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+    "removeCredit": false, /* Remove credit link */
+    "moreInfoLink": true, /* Show more info link */
+    "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+
+    //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for subdomain website */
+
+    "readmoreLink": "/cookiespolicy" /* Change the default readmore link pointing to tarteaucitron.io */
 });
 </script>
+```
+
+# Create custom service
+```js
+tarteaucitron.services.mycustomservice = {
+  "key": "mycustomservice",
+  "type": "ads|analytic|api|comment|other|social|support|video",
+  "name": "MyCustomService",
+  "needConsent": true,
+  "cookies": ['cookie', 'cookie2'],
+  "readmoreLink": "/custom_read_more", // If you want to change readmore link
+  "js": function () {
+    "use strict";
+    // When user allow cookie
+  },
+  "fallback": function () {
+    "use strict";
+    // when use deny cookie
+  }
+};
 ```
